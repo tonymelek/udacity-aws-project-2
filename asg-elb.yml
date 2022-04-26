@@ -1,5 +1,13 @@
 Description: This file used to create new securitygroup, autoscaling group and elastic load balancer
-     
+Parameters:
+  ImageId:
+    Type: String
+  InstanceType:
+    Type: String   
+  IamProfile:
+    Type: String
+  
+
 Resources:
   InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
@@ -38,9 +46,10 @@ Resources:
             VolumeSize: 10
             VolumeType: "gp2"
             DeleteOnTermination: "true"
-      ImageId: ami-0f9fc25dd2506cf6d
+      ImageId: !Ref ImageId
+      IamInstanceProfile: !Ref IamProfile
       InstanceMonitoring: true
-      InstanceType: t2.micro
+      InstanceType: !Ref InstanceType
       KeyName: udacity-key-pair
       LaunchConfigurationName: Launcher
       SecurityGroups: 
@@ -48,10 +57,11 @@ Resources:
       UserData: 
         Fn::Base64: !Sub |
           #!/bin/bash
-          yum update -y
-          yum install -y httpd
-          systemctl start httpd
-          systemctl enable httpd
+          apt-get update -y
+          apt-get install apache2 -y
+          apt-get install aws-cli -y
+          systemctl start apache2.service
+          aws s3 cp s3://project2-s3/index.html /var/www/html/index.html
 
   TargetGroup1:
     Type: AWS::ElasticLoadBalancingV2::TargetGroup
@@ -82,12 +92,12 @@ Resources:
       AvailabilityZones: 
         - !Select [0, !GetAZs '']
         - !Select [1, !GetAZs '']
-      DesiredCapacity: '2'
+      DesiredCapacity: '4'
       DesiredCapacityType: units
       HealthCheckGracePeriod: 2
       HealthCheckType: ELB
       LaunchConfigurationName: !Ref Launcher
-      MaxSize: '3'
+      MaxSize: '5'
       MinSize: '1'
       NewInstancesProtectedFromScaleIn: false
       Tags: 
@@ -118,3 +128,9 @@ Resources:
           Values: [/]
         ListenerArn: !Ref Listener
         Priority: 1
+Outputs:
+  ELB:
+    Description: Elastic Load Balancer URL
+    Value: !Join ["",["http://", !GetAtt LoadBalancer.DNSName]]
+    Export:
+      Name: ELBUrl        

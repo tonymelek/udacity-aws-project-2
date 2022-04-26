@@ -1,0 +1,14 @@
+[
+    {
+        "ParameterKey": "ImageId",
+        "ParameterValue": "ami-0e472ba40eb589f49"
+    },
+    {
+        "ParameterKey": "InstanceType",
+        "ParameterValue": "t3.medium"
+    },
+    {
+        "ParameterKey": "IamProfile",
+        "ParameterValue": "arn:aws:iam::768486161732:instance-profile/s3-read-only"
+    }
+]
