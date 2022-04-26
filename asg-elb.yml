@@ -39,7 +39,7 @@ Resources:
   Launcher:
     Type: AWS::AutoScaling::LaunchConfiguration
     Properties: 
-      AssociatePublicIpAddress: true
+      AssociatePublicIpAddress: false
       BlockDeviceMappings: 
         - DeviceName: "/dev/sdk"
           Ebs: 
@@ -59,7 +59,7 @@ Resources:
           #!/bin/bash
           apt-get update -y
           apt-get install apache2 -y
-          apt-get install aws-cli -y
+          apt-get install awscli -y
           systemctl start apache2.service
           aws s3 cp s3://project2-s3/index.html /var/www/html/index.html
 
