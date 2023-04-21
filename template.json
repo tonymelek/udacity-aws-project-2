@@ -1,0 +1,28 @@
+{
+  "Resources": {
+    "param1": {
+      "Type": "AWS::SSM::Parameter",
+      "Properties": {
+        "Name": "url",
+        "Type": "String",
+        "Value": "someUrl"
+      }
+    },
+    "param2": {
+      "Type": "AWS::SSM::Parameter",
+      "Properties": {
+        "Name": "Path197",
+        "Type": "String",
+        "Value": "somePath"
+      }
+    },
+    "param3": {
+      "Type": "AWS::SSM::Parameter",
+      "Properties": {
+        "Name": "optional",
+        "Type": "String",
+        "Value": "no"
+      }
+    }
+  }
+}

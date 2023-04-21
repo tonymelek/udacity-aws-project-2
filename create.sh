@@ -1,14 +1,10 @@
-while getopts s:t:p: flag
+while getopts s:t: flag
 do
     case "${flag}" in
         s) stack=${OPTARG};;
         t) template=${OPTARG};;
-        p) params=${OPTARG};;
     esac
 done
 
-if [ -e ${params}.json ]; then
-aws cloudformation create-stack  --stack-name "${stack}" --region us-east-1 --template-body "file://${template}.yml" --parameters "file://${params}.json" --profile udacity
-else
-aws cloudformation create-stack  --stack-name "${stack}" --region us-east-1 --template-body "file://${template}.yml"  --profile udacity
-fi
+
+aws cloudformation create-stack  --stack-name "${stack}" --region ap-southeast-2 --template-body "file://${template}.json"  --profile default

@@ -1,1 +1,0 @@
-http://asg-e-loadb-6oe5uot44zk-986612100.us-east-1.elb.amazonaws.com/
