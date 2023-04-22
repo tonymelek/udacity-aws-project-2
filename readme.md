@@ -5,7 +5,7 @@
 * [Usage](#usage)
 * [License](#license)
 * [Contributing](#contributing)
-* [Questions](#questions)
+
 ## Description
 This is a microservice designed to run on localhost and uses AWS CLI to create and delete stacks, that will  aytomate the process to create or delete some SSM parameters
 ## Installation
