@@ -1,19 +1,30 @@
-const fs=require('fs');
-const path=require('path');
-const params = require('./params.json');
+const express=require('express');
+const { asyncExec, createTemplate } = require('./utils');
+const app=express();
 
-const template = {
-    Resources: {}
-};
+// Define middleware here
+app.use(express.json())
 
-params.forEach((param, index) => template.Resources[`param${index+1}`] = {
-    "Type": "AWS::SSM::Parameter",
-    "Properties": {
-        "Name": param.Name,
-        "Type": param.Type || "String",
-        "Value": param.Value,
-        "Description": param.Description,
-        "Tags": param.Tags
+
+app.post('/create',async(req,res)=>{
+    const {body:{stack,params}}=req;
+    createTemplate(params);
+    try {
+        const result=await asyncExec('create',stack);
+        res.send({result:JSON.parse(result)})
+    } catch (error) {
+        res.sendStatus(500).send({error})
     }
 });
-fs.writeFileSync(path.join(__dirname,'template.json'),JSON.stringify(template,null,2),'utf-8');
+
+app.delete('/delete',async(req,res)=>{
+    const {body:{stack}}=req;
+    try {
+        const result=await asyncExec('delete',stack);
+        res.send({result:'succesfully deleted'})
+    } catch (error) {
+        res.sendStatus(500).send({error})
+    }
+});
+
+app.listen('5000',console.log('ParamStore manager is running on port 5000'))

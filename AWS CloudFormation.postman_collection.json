@@ -1,0 +1,66 @@
+{
+	"info": {
+		"_postman_id": "9b489158-011e-4a34-a448-f2faf1999cfc",
+		"name": "AWS CloudFormation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12735493"
+	},
+	"item": [
+		{
+			"name": "Delete Stack",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"stack\":\"from-postman\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/delete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"delete"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Stack",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"stack\":\"from-postman\",\r\n    \"params\":[\r\n    {\r\n        \"name\": \"url\",\r\n        \"value\": \"https://www.google.com\"\r\n    },\r\n    {\r\n        \"name\": \"Path197\",\r\n        \"value\": \"/create\"\r\n    },\r\n    {\r\n        \"name\": \"Information\",\r\n        \"value\": \"we have no optional components\",\r\n        \"description\":\"You can optionally add some description text\",\r\n        \"tags\":{\r\n            \"desc\":\"tags are optional and entered in json key value pairs\"\r\n        }\r\n    }\r\n]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"create"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
