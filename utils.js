@@ -30,7 +30,7 @@ const asyncExec=(action,stack)=>{
                 return rej(stderr);
               }
             try{
-                fs.unlinkSync.join(__dirname,'template.json');
+                fs.unlinkSync(path.join(__dirname,'template.json'));
             }
             catch(err){};     
             res(stdout);
