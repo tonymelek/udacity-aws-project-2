@@ -1,0 +1,32 @@
+{
+  "Resources": {
+    "param1": {
+      "Type": "AWS::SSM::Parameter",
+      "Properties": {
+        "Name": "url",
+        "Type": "String",
+        "Value": "https://www.google.com"
+      }
+    },
+    "param2": {
+      "Type": "AWS::SSM::Parameter",
+      "Properties": {
+        "Name": "Path197",
+        "Type": "String",
+        "Value": "/create"
+      }
+    },
+    "param3": {
+      "Type": "AWS::SSM::Parameter",
+      "Properties": {
+        "Name": "Information",
+        "Type": "String",
+        "Value": "we have no optional components",
+        "Description": "You can optionally add some description text",
+        "Tags": {
+          "desc": "tags are optional and entered in json key value pairs"
+        }
+      }
+    }
+  }
+}

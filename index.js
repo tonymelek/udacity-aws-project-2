@@ -13,7 +13,7 @@ app.post('/create',async(req,res)=>{
         const result=await asyncExec('create',stack);
         res.send({result:JSON.parse(result)})
     } catch (error) {
-        res.sendStatus(500).send({error})
+        res.status(500).send({error:error.replace(/\r\n/g,'')})
     }
 });
 
@@ -23,7 +23,7 @@ app.delete('/delete',async(req,res)=>{
         const result=await asyncExec('delete',stack);
         res.send({result:'succesfully deleted'})
     } catch (error) {
-        res.sendStatus(500).send({error})
+        res.status(500).send({error:error.replace(/\r\n/,'')})
     }
 });
 
