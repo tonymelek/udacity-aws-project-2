@@ -24,14 +24,18 @@ const createTemplate=params=>{
 
 const asyncExec=(action,stack)=>{
     return new Promise((res,rej)=>{
-        const commandString=`sh ${__dirname}/${action}.sh -s ${stack}`
+        const commandString=`sh ${__dirname}/${action}.sh -s ${stack}`;
         exec(commandString ,(err,stdout,stderr)=>{
             if(err || stderr){
                 return rej(stderr);
               }
-         res(stdout);
-        })
-    })
+            try{
+                fs.unlinkSync.join(__dirname,'template.json');
+            }
+            catch(err){};     
+            res(stdout);
+        });
+    });
 };
 
 module.exports={asyncExec,createTemplate};
